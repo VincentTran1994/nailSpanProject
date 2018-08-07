@@ -1,0 +1,35 @@
+<ion-header >
+  <ion-navbar color=dark>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides pager style="max-height: 40%;">
+    <ion-slide *ngFor="let item of slideData">
+      <img src="{{item}}" alt="">
+    </ion-slide>
+  </ion-slides>
+
+  <ion-list padding>
+    <h2>Our Services</h2>
+    <ion-item *ngFor="let service of services">
+      <ion-thumbnail item-start>
+        <img src="{{service.img}}">
+      </ion-thumbnail>
+      <h2>{{service.title}}</h2>
+      <p>{{service.content}}</p>
+      <button ion-button clear item-end>View</button>
+    </ion-item>
+  </ion-list>
+
+  <h2 padding>Gallery</h2>
+    <ion-slides pager padding style="max-height: 35%; margin-bottom: 15%;">
+      <ion-slide *ngFor="let gallery of galleries">
+        <img src="{{gallery}}"  alt="">
+      </ion-slide>
+    </ion-slides>
+</ion-content>

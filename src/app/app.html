@@ -1,0 +1,20 @@
+<ion-menu [content]="content" >
+  <ion-header >
+    <ion-toolbar color=dark>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content style="background-color: #222;">
+    <img style="margin-left: 40px;" src="http://danang.1888demo.com/nails-ws003/wp-content/uploads/2018/02/NailLogo-1.png" alt="">
+    <ion-list>
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" color=dark>
+        {{p.title}}
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
