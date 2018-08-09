@@ -1,0 +1,44 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>contact-form</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+
+    <ion-item>
+      <ion-label stacked>First and Last Name</ion-label>
+      <ion-input type="text" [(ngModel)]="sender.name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Phone Number</ion-label>
+      <ion-input type="tel" [(ngModel)]="sender.phone"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input type="email" [(ngModel)]="sender.email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Subject</ion-label>
+      <ion-input type="text" [(ngModel)]="sender.subject"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Message</ion-label>
+      <ion-textarea rows=8 [(ngModel)]="sender.message"></ion-textarea>
+    </ion-item>
+    
+    <ion-item>
+        <button ion-button block round color="dark" (click)="onSubmit()">Submit</button>
+    </ion-item>
+
+  </ion-list>
+</ion-content>
