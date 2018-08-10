@@ -29,7 +29,10 @@ export class ContactPage {
   }
 
   onContact(){
-    this.popOver.create(ContactPopOverPage).present();
+    this.popOver.create(ContactPopOverPage).present({
+      disableApp: true,
+      direction: "bottom"
+    });
   }
 
 }

@@ -15,6 +15,7 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { WpApiProvider } from '../providers/wp-api/wp-api';
 import { EmailComposer } from '../../node_modules/@ionic-native/email-composer';
 import { CallNumber } from '@ionic-native/call-number';
+import { SMS } from '../../node_modules/@ionic-native/sms';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { CallNumber } from '@ionic-native/call-number';
     WpApiProvider,
     EmailComposer,
     CallNumber,
+    SMS,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     WpApiProvider
   ]
