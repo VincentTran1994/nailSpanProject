@@ -1,0 +1,41 @@
+<ion-content>
+  <!-- <ion-item (click)="onCalling">
+    <ion-icon name="call" item-start large></ion-icon>
+    <h2>(832) 997 3345</h2>
+    <p>Tab to make a call now</p>
+  </ion-item>
+
+  <ion-item (click)="onTexting">
+    <ion-icon name="text" item-start large></ion-icon>
+    <h2>(832) 997 3345</h2>
+    <p>Tab to send us a text</p>
+  </ion-item>
+
+  <ion-item (click)="onEmailing">
+    <ion-icon name="mail" item-start large></ion-icon>
+    <h2>vincenttran2601@gmail.com</h2>
+    <p>tab to book a Schedule</p>
+  </ion-item> -->
+
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col text-center>
+          <ion-icon name="call" item-start large (click)="onCalling()"></ion-icon>
+          <p>Phone</p>
+        </ion-col>
+
+        <ion-col text-center>
+          <ion-icon name="text" item-start large (click)="onTexting()"></ion-icon>
+          <p>Message</p>
+        </ion-col>
+
+        <ion-col text-center>
+          <ion-icon name="mail" item-start large (click)="onEmailing()"></ion-icon>
+          <p>Mail</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+</ion-content>

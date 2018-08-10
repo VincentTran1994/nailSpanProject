@@ -12,44 +12,46 @@
 
 <ion-content padding>
 
-  <div >
-    <ion-item>
-      <ion-title>Where you can find Us!</ion-title>
-    </ion-item>
+  <ion-item>
+    <ion-title>Our Location</ion-title>
+  </ion-item>
 
-    <ion-item>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d55286.21554469209!2d-95.77728202956494!3d29.996999966145324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e0!4m0!4m5!1s0x86412a8fa462f9fb%3A0xecd00377d3b8ae99!2s20703+Maple+Village+Dr%2C+Cypress%2C+TX+77433!3m2!1d29.9970046!2d-95.7422625!5e0!3m2!1sen!2sus!4v1533768150777"
-        height="300" frameborder="0" style="border:0"></iframe>
-      <ion-fab right top>
-        <button ion-fab>
-          <ion-icon name="pin"></ion-icon>
-        </button>
-      </ion-fab>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon name="subway" item-start large></ion-icon>
-      <h2>GPS Office</h2>
-      <p>6139 Oakbrook Parkway #A, Norcross, GA 30093</p>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon name="stopwatch" item-start large></ion-icon>
-      <h2>Schedule</h2>
-      <p >More detail</p>
-    </ion-item>
-
-    <ion-item>
-      <span item-start>18 min</span>
-      <span item-start>(2.6 mi)</span>
-      <button ion-button icon-start clear item-end>
-        <ion-icon name="navigate"></ion-icon>
-        Start
+  <ion-item>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d55286.21554469209!2d-95.77728202956494!3d29.996999966145324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e0!4m0!4m5!1s0x86412a8fa462f9fb%3A0xecd00377d3b8ae99!2s20703+Maple+Village+Dr%2C+Cypress%2C+TX+77433!3m2!1d29.9970046!2d-95.7422625!5e0!3m2!1sen!2sus!4v1533768150777"
+      height="300" frameborder="0" style="border:0"></iframe>
+    <ion-fab right top>
+      <button ion-fab>
+        <ion-icon name="pin"></ion-icon>
       </button>
-    </ion-item>
+    </ion-fab>
+  </ion-item>
 
-    <ion-item>
-      <button ion-button block color="dark" (click)="sendingEmail()">Block Button</button>
-    </ion-item>
-  </div>
+  <ion-item>
+    <ion-icon name="subway" item-start large></ion-icon>
+    <h2>GPS Office</h2>
+    <p>6139 Oakbrook Parkway #A, Norcross, GA 30093</p>
+  </ion-item>
+
+  <ion-item (click)="onSchedule()">
+    <ion-icon name="stopwatch" item-start large></ion-icon>
+    <h2>Bussiness Hours</h2>
+    <p>Tap more detail</p>
+  </ion-item>
+
+  <ion-item>
+    <span item-start>18 min</span>
+    <span item-start>(2.6 mi)</span>
+    <button ion-button icon-start clear item-end>
+      <ion-icon name="navigate"></ion-icon>
+      Start
+    </button>
+  </ion-item>
+
+  <ion-item (click) = "onContact()">
+    <button ion-button icon-start full blocked rouned color="dark">
+      <ion-icon name="send"></ion-icon>
+      Reach us out!
+    </button>
+  </ion-item>
+
 </ion-content>

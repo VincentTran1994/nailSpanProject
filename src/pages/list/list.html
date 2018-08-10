@@ -1,23 +1,19 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>List</ion-title>
-  </ion-navbar>
-</ion-header>
 
 <ion-content>
+
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
+    <button ion-item *ngFor="let item of items" >
+      {{item}}
+      <div *ngIf="item != 'Sunday'&&item !='Saturday' then notSunday; else sunday" class="item-note" item-end></div>
+      <ng-template #notSunday class="item-note">From 9am to 6pm</ng-template>
+      <ng-template #sunday class="item-note">close</ng-template>
     </button>
   </ion-list>
-  <div *ngIf="selectedItem" padding>
+  <ion-item>
+    <button ion-button full  block rounded color='dark'(click)="onClick()">Done</button>
+  </ion-item>
+
+  <!-- <div *ngIf="selectedItem" padding>
     You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+  </div> -->
 </ion-content>

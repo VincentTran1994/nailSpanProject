@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ContactFormPage } from '../contact-form/contact-form';
+import { ListPage } from '../list/list';
+import { PopoverController } from 'ionic-angular';
+import { ContactPopOverPage } from '../contact-pop-over/contact-pop-over';
 
 
 @IonicPage()
@@ -9,44 +11,25 @@ import { ContactFormPage } from '../contact-form/contact-form';
   templateUrl: 'contact.html',
 })
 export class ContactPage {
-  selectedItem: true;
-  icons: string[];
-  items: Array<{title: string, note: string, icon: string}>;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
+              public popOver : PopoverController
               ) {
-    // If we navigated to this page, we will have an item available as a nav param
-    this.selectedItem = navParams.get('item');
-
-    // Let's populate this page with some filler content for funzies
-    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-    'american-football', 'boat', 'bluetooth', 'build'];
-
-    this.items = [];
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+    
   }
 
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ContactPage');
-  }
-  
-  sendingEmail(){
-    this.navCtrl.push(ContactFormPage);
+    // console.log('ionViewDidLoad ContactPage');
   }
 
-  itemTapped(event, item) {
-    // That's right, we're pushing to ourselves!
-    this.navCtrl.push(ContactFormPage, {
-      item: item
-    });
+  onSchedule(){
+    this.navCtrl.push(ListPage);
+  }
+
+  onContact(){
+    this.popOver.create(ContactPopOverPage).present();
   }
 
 }
