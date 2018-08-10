@@ -8,6 +8,7 @@ import { ListPage } from '../pages/list/list';
 import { ContactPage } from '../pages/contact/contact';
 import { ContactFormPage } from '../pages/contact-form/contact-form';
 import { ContactPopOverPage } from '../pages/contact-pop-over/contact-pop-over';
+import { ServicePage } from '../pages/service/service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -25,7 +26,8 @@ import { SMS } from '../../node_modules/@ionic-native/sms';
     ListPage,
     ContactPage,
     ContactFormPage,
-    ContactPopOverPage
+    ContactPopOverPage,
+    ServicePage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { SMS } from '../../node_modules/@ionic-native/sms';
     ListPage,
     ContactPage,
     ContactFormPage,
-    ContactPopOverPage
+    ContactPopOverPage,
+    ServicePage
   ],
   providers: [
     StatusBar,
