@@ -17,6 +17,9 @@ import { WpApiProvider } from '../providers/wp-api/wp-api';
 import { EmailComposer } from '../../node_modules/@ionic-native/email-composer';
 import { CallNumber } from '@ionic-native/call-number';
 import { SMS } from '../../node_modules/@ionic-native/sms';
+import { MoreDetailPage } from '../pages/more-detail/more-detail';
+import { ServiceWpProvider } from '../providers/service-wp/service-wp';
+import { Push } from '@ionic-native/push';
 
 
 @NgModule({
@@ -27,7 +30,8 @@ import { SMS } from '../../node_modules/@ionic-native/sms';
     ContactPage,
     ContactFormPage,
     ContactPopOverPage,
-    ServicePage
+    ServicePage,
+    MoreDetailPage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,8 @@ import { SMS } from '../../node_modules/@ionic-native/sms';
     ContactPage,
     ContactFormPage,
     ContactPopOverPage,
-    ServicePage
+    ServicePage,
+    MoreDetailPage
   ],
   providers: [
     StatusBar,
@@ -52,7 +57,9 @@ import { SMS } from '../../node_modules/@ionic-native/sms';
     CallNumber,
     SMS,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    WpApiProvider
+    WpApiProvider,
+    ServiceWpProvider,
+    Push
   ]
 })
 export class AppModule {}

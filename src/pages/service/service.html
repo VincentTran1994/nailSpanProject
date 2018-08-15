@@ -1,12 +1,23 @@
-<ion-header >
-    <ion-navbar color=dark>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>Service</ion-title>
-    </ion-navbar>
-  </ion-header>
+<ion-header>
+  <ion-navbar color=dark>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Service</ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content padding>
+  <h1>{{res}}</h1>
+  <ion-list *ngFor = "let menu of menus">
+    <ion-list-header><h2>{{menu.header}}</h2></ion-list-header>
+    <ion-item *ngFor = "let detail of menu.details" >
+      <ion-avatar item-start>
+        <img src="{{detail.img}}">
+      </ion-avatar>
+      <h2 (click)="moreDetail(detail)">{{detail.title}}</h2>
+      <p item-right>{{detail.price}}</p>
+    </ion-item>
+  </ion-list>
 
 </ion-content>
