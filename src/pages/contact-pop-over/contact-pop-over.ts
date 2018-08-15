@@ -25,7 +25,7 @@ export class ContactPopOverPage {
     console.log('ionViewDidLoad ContactPopOverPage');
   }
 
-  //phone call
+  // phone call
   onCalling() {
     this.callNumber.callNumber('8329973345', true)
     .then(res => {
@@ -41,7 +41,7 @@ export class ContactPopOverPage {
     });
   }
 
-  //text message
+  // text message
   onTexting(){
     //this will be replace...
     let content = "this is a test message"

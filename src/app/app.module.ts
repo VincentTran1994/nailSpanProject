@@ -19,6 +19,7 @@ import { CallNumber } from '@ionic-native/call-number';
 import { SMS } from '../../node_modules/@ionic-native/sms';
 import { MoreDetailPage } from '../pages/more-detail/more-detail';
 import { ServiceWpProvider } from '../providers/service-wp/service-wp';
+import { Push } from '@ionic-native/push';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { ServiceWpProvider } from '../providers/service-wp/service-wp';
     SMS,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     WpApiProvider,
-    ServiceWpProvider
+    ServiceWpProvider,
+    Push
   ]
 })
 export class AppModule {}
