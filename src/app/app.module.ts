@@ -20,6 +20,7 @@ import { SMS } from '../../node_modules/@ionic-native/sms';
 import { MoreDetailPage } from '../pages/more-detail/more-detail';
 import { ServiceWpProvider } from '../providers/service-wp/service-wp';
 import { Push } from '@ionic-native/push';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { Push } from '@ionic-native/push';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     WpApiProvider,
     ServiceWpProvider,
-    Push
+    Push,
+    InAppBrowser
   ]
 })
 export class AppModule {}

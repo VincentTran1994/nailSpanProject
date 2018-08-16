@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.GPS.NailsDemo" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>App</name>
-    <description>An awesome Ionic/Cordova app.</description>
+    <name>Nails Demo App</name>
+    <description>A demo mobile application for a nails salon.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
     <access origin="*" />
@@ -88,7 +88,7 @@
         <variable name="SENDER_ID" value="220488692836" />
         <variable name="FCM_VERSION" value="11.6.2" />
     </plugin>
+    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <engine name="ios" spec="4.5.5" />
-
     <engine name="android" spec="7.0.0" />
 </widget>
