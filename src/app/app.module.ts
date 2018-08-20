@@ -21,6 +21,17 @@ import { MoreDetailPage } from '../pages/more-detail/more-detail';
 import { ServiceWpProvider } from '../providers/service-wp/service-wp';
 import { Push } from '@ionic-native/push';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { AngularFireModule } from 'angularfire2';
+import {AngularFireDatabaseModule} from 'angularfire2/database'
+
+const fireBaseConfig = {
+  apiKey: "AIzaSyAnDR0mAVtYUjg1ffcZLCic1BPfzzRFovo",
+  authDomain: "nailsgpsapp.firebaseapp.com",
+  databaseURL: "https://nailsgpsapp.firebaseio.com",
+  projectId: "nailsgpsapp",
+  storageBucket: "nailsgpsapp.appspot.com",
+  // messagingSenderId: "220488692836"
+};
 
 
 @NgModule({
@@ -37,6 +48,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
   imports: [
     BrowserModule,
     HttpClientModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(fireBaseConfig),
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],

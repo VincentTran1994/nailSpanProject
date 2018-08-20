@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { WpApiProvider } from '../../providers/wp-api/wp-api';
 import { LoadingController } from 'ionic-angular';
 import * as $ from 'jquery'
+import { AngularFireDatabase } from 'angularfire2/database';
+
 
 @Component({
   selector: 'page-home',
@@ -17,6 +19,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,
               public wpAPI: WpApiProvider,
+              public angularFireData: AngularFireDatabase,
               public loadingCrtl: LoadingController) 
   {  
     this.loading();
@@ -57,13 +60,23 @@ export class HomePage {
           // console.log(res[0]["guid"]);
         }
       );
+
+    this.getFireData();
   }
 
   loading(){
     const loader = this.loadingCrtl.create({
       content: "Please wait while Loading Contents...",
-      duration: 500
+      duration: 1000
     });
     loader.present();
+  }
+
+  getFireData(){
+    this.angularFireData.list('/').valueChanges().subscribe(
+      data => {
+        console.log(data[0]);
+      }
+    );
   }
 }
