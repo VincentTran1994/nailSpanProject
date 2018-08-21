@@ -21,8 +21,12 @@ import { MoreDetailPage } from '../pages/more-detail/more-detail';
 import { ServiceWpProvider } from '../providers/service-wp/service-wp';
 import { Push } from '@ionic-native/push';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import {AngularFireDatabaseModule} from 'angularfire2/database'
+import { Firebase } from '@ionic-native/firebase';
+import { FcmProvider } from '../providers/fcm/fcm';
 
 const fireBaseConfig = {
   apiKey: "AIzaSyAnDR0mAVtYUjg1ffcZLCic1BPfzzRFovo",
@@ -30,7 +34,7 @@ const fireBaseConfig = {
   databaseURL: "https://nailsgpsapp.firebaseio.com",
   projectId: "nailsgpsapp",
   storageBucket: "nailsgpsapp.appspot.com",
-  // messagingSenderId: "220488692836"
+  messagingSenderId: "220488692836"
 };
 
 
@@ -49,6 +53,7 @@ const fireBaseConfig = {
     BrowserModule,
     HttpClientModule,
     AngularFireDatabaseModule,
+    AngularFirestoreModule,
     AngularFireModule.initializeApp(fireBaseConfig),
     IonicModule.forRoot(MyApp),
   ],
@@ -74,7 +79,9 @@ const fireBaseConfig = {
     WpApiProvider,
     ServiceWpProvider,
     Push,
-    InAppBrowser
+    InAppBrowser,
+    Firebase,
+    FcmProvider
   ]
 })
 export class AppModule {}

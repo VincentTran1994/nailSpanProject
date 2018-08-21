@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -7,6 +7,8 @@ import { HomePage } from '../pages/home/home';
 import { ContactPage } from '../pages/contact/contact';
 import { ServicePage } from '../pages/service/service';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { FcmProvider } from '../providers/fcm/fcm';
+import { tap } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,6 +23,8 @@ export class MyApp {
   constructor(public platform: Platform, 
               public statusBar: StatusBar,
               private push: Push, 
+              public fcm: FcmProvider, 
+              public toastCtrl: ToastController,
               public splashScreen: SplashScreen) {
     this.initializeApp();
 
@@ -30,15 +34,31 @@ export class MyApp {
       { title: 'Service', component: ServicePage },
       { title: 'Conatct', component: ContactPage }
     ];
-    this.pushSetUp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins areailable.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      
+      //get a fcm token
+      this.fcm.getToken()
+
+      // Listen to incoming messages
+      this.fcm.listenToNotifications().pipe(
+        
+        tap(msg => {
+          console.log(msg);
+          // show a toast
+          const toast = this.toastCtrl.create({
+            message: msg.body,
+            duration: 3000
+          });
+          toast.present();
+        })
+      )
+      .subscribe();
+
     });
   }
 
@@ -48,25 +68,5 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  pushSetUp(){
-    const options: PushOptions = {
-      android: {
-        senderID: '220488692836'
-      },
-      ios: {
-          alert: 'true',
-          badge: true,
-          sound: 'false'
-      }
-   };
-   
-   const pushObject: PushObject = this.push.init(options);
-   
-   
-   pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
-   
-   pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
-   
-   pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
-  }
+
 }
