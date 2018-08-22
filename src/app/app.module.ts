@@ -10,9 +10,11 @@ import { ContactFormPage } from '../pages/contact-form/contact-form';
 import { ContactPopOverPage } from '../pages/contact-pop-over/contact-pop-over';
 import { ServicePage } from '../pages/service/service';
 import { NotificationPopOverPage } from '../pages/notification-pop-over/notification-pop-over';
+import { WelcomePage } from '../pages/welcome/welcome';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { WpApiProvider } from '../providers/wp-api/wp-api';
 import { EmailComposer } from '../../node_modules/@ionic-native/email-composer';
@@ -28,6 +30,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import {AngularFireDatabaseModule} from 'angularfire2/database'
 import { Firebase } from '@ionic-native/firebase';
 import { FcmProvider } from '../providers/fcm/fcm';
+
 
 
 const fireBaseConfig = {
@@ -50,7 +53,8 @@ const fireBaseConfig = {
     ContactPopOverPage,
     ServicePage,
     MoreDetailPage,
-    NotificationPopOverPage
+    NotificationPopOverPage,
+    WelcomePage
   ],
   imports: [
     BrowserModule,
@@ -59,6 +63,7 @@ const fireBaseConfig = {
     AngularFirestoreModule,
     AngularFireModule.initializeApp(fireBaseConfig),
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -70,7 +75,8 @@ const fireBaseConfig = {
     ContactPopOverPage,
     ServicePage,
     MoreDetailPage,
-    NotificationPopOverPage
+    NotificationPopOverPage,
+    WelcomePage
   ],
   providers: [
     StatusBar,
