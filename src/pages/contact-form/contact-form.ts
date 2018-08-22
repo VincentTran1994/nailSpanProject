@@ -37,8 +37,6 @@ export class ContactFormPage {
 
   onSubmit() {
     // this.check = this.platform.;
-
-
     if (this.platform.is('android') || this.platform.is('ios')) {
       this.toast.create({
         message: "Sending...",

@@ -9,6 +9,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { ContactFormPage } from '../pages/contact-form/contact-form';
 import { ContactPopOverPage } from '../pages/contact-pop-over/contact-pop-over';
 import { ServicePage } from '../pages/service/service';
+import { NotificationPopOverPage } from '../pages/notification-pop-over/notification-pop-over';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -27,6 +28,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import {AngularFireDatabaseModule} from 'angularfire2/database'
 import { Firebase } from '@ionic-native/firebase';
 import { FcmProvider } from '../providers/fcm/fcm';
+
 
 const fireBaseConfig = {
   apiKey: "AIzaSyAnDR0mAVtYUjg1ffcZLCic1BPfzzRFovo",
@@ -47,7 +49,8 @@ const fireBaseConfig = {
     ContactFormPage,
     ContactPopOverPage,
     ServicePage,
-    MoreDetailPage
+    MoreDetailPage,
+    NotificationPopOverPage
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,8 @@ const fireBaseConfig = {
     ContactFormPage,
     ContactPopOverPage,
     ServicePage,
-    MoreDetailPage
+    MoreDetailPage,
+    NotificationPopOverPage
   ],
   providers: [
     StatusBar,

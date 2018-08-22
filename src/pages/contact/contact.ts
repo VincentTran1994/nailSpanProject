@@ -37,15 +37,14 @@ export class ContactPage {
     });
   }
 
+  //open inAppBrowser for reservation form
   reservation(){
     const options : InAppBrowserOptions = {
       zoom : 'no',
       hardwareback: 'no',
       mediaPlaybackRequiresUserAction: 'yes',
     }
-
     const browser = this.iab.create("http://danang.1888demo.com/nails-ws003/reservation-form/",'_self',options);
-    
     browser.on('loadstop').subscribe(event => {
       browser.executeScript({
         code: "document.getElementsByClassName('header-inner')[0].style.display = 'none';"

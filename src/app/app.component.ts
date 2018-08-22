@@ -1,14 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, ToastController } from 'ionic-angular';
+import { Nav, Platform, ToastController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ContactPage } from '../pages/contact/contact';
 import { ServicePage } from '../pages/service/service';
-import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { FcmProvider } from '../providers/fcm/fcm';
 import { tap } from 'rxjs/operators';
+import { ContactPopOverPage } from '../pages/contact-pop-over/contact-pop-over';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
   templateUrl: 'app.html'
@@ -18,14 +19,15 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, 
-              public statusBar: StatusBar,
-              private push: Push, 
-              public fcm: FcmProvider, 
-              public toastCtrl: ToastController,
-              public splashScreen: SplashScreen) {
+  constructor(public platform: Platform,
+    public statusBar: StatusBar,
+    public fcm: FcmProvider,
+    public angularFireData: AngularFireDatabase,
+    public alertControl: AlertController,
+    public toats: ToastController,
+    public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -40,25 +42,8 @@ export class MyApp {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      
-      //get a fcm token
-      this.fcm.getToken()
-
-      // Listen to incoming messages
-      this.fcm.listenToNotifications().pipe(
-        
-        tap(msg => {
-          console.log(msg);
-          // show a toast
-          const toast = this.toastCtrl.create({
-            message: msg.body,
-            duration: 3000
-          });
-          toast.present();
-        })
-      )
-      .subscribe();
-
+      //notification
+      this.fcmService();
     });
   }
 
@@ -68,5 +53,50 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
+  fcmService() {
+    //get a fcm token
+    this.fcm.getToken()
 
+    // Listen to incoming messages
+    if (this.platform.is('android') || this.platform.is('ios')) {
+      this.fcm.listenToNotifications().pipe(
+        tap(msg => {
+          console.log(msg);
+          this.angularFireData.list('/notifications').push({
+            'msg': msg,
+            'new': true
+          });
+          // show a toast
+          const alert = this.alertControl.create({
+            title: msg.title,
+            message: msg.body,
+            buttons: [
+              {
+                text: 'later',
+                handler: () => {
+                  this.toats.create({
+                    message: "Tapping on the left top corner for more info!",
+                    duration: 1500
+                  }).present();
+                }
+              },
+              {
+                text: 'More info',
+                handler: () => {
+                  this.nav.push(ContactPopOverPage);
+                }
+              }
+            ]
+          });
+          alert.present();
+        })
+      ).subscribe();
+    }
+    else {
+      console.log("error: cordova is not support in this platform!")
+    }
+
+
+
+  }
 }
