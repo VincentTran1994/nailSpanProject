@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "220488692836",
+    "firebase_url": "https://nailsgpsapp.firebaseio.com",
+    "project_id": "nailsgpsapp",
+    "storage_bucket": "nailsgpsapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220488692836:android:7f768f8104b2bd3a",
+        "android_client_info": {
+          "package_name": "com.GPS.NailsDemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220488692836-ppk7t28ekd74l6s02r341ncv51hd2d09.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYwFUiRWQcIOE2bVFOGyHOZhrr6bjwug4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,12 +1,17 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, ToastController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Storage } from '@ionic/storage';
 
 import { HomePage } from '../pages/home/home';
 import { ContactPage } from '../pages/contact/contact';
 import { ServicePage } from '../pages/service/service';
-import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { FcmProvider } from '../providers/fcm/fcm';
+import { tap } from 'rxjs/operators';
+import { ContactPopOverPage } from '../pages/contact-pop-over/contact-pop-over';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { WelcomePage } from '../pages/welcome/welcome';
 
 @Component({
   templateUrl: 'app.html'
@@ -14,14 +19,18 @@ import { Push, PushObject, PushOptions } from '@ionic-native/push';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = WelcomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, 
-              public statusBar: StatusBar,
-              private push: Push, 
-              public splashScreen: SplashScreen) {
+  constructor(public platform: Platform,
+    public statusBar: StatusBar,
+    public storage: Storage,
+    public fcm: FcmProvider,
+    public angularFireData: AngularFireDatabase,
+    public alertControl: AlertController,
+    public toats: ToastController,
+    public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -30,15 +39,16 @@ export class MyApp {
       { title: 'Service', component: ServicePage },
       { title: 'Conatct', component: ContactPage }
     ];
-    this.pushSetUp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      //notification
+      this.fcmService();
+      //welcome page showing control(show only one time)
+      this.welcomeShow();
     });
   }
 
@@ -48,25 +58,60 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  pushSetUp(){
-    const options: PushOptions = {
-      android: {
-        senderID: '220488692836'
-      },
-      ios: {
-          alert: 'true',
-          badge: true,
-          sound: 'false'
+  fcmService() {
+    //get a fcm token
+    this.fcm.getToken()
+
+    // Listen to incoming messages
+    if (this.platform.is('android') || this.platform.is('ios')) {
+      this.fcm.listenToNotifications().pipe(
+        tap(msg => {
+          console.log(msg);
+          this.angularFireData.list('/notifications').push({
+            'msg': msg,
+            'new': true
+          });
+          // show a toast
+          const alert = this.alertControl.create({
+            title: msg.title,
+            message: msg.body,
+            buttons: [
+              {
+                text: 'later',
+                handler: () => {
+                  this.toats.create({
+                    message: "Tapping on the left top corner for more info!",
+                    duration: 1500
+                  }).present();
+                }
+              },
+              {
+                text: 'More info',
+                handler: () => {
+                  this.nav.push(ContactPopOverPage);
+                }
+              }
+            ]
+          });
+          alert.present();
+        })
+      ).subscribe();
+    }
+    else {
+      console.log("error: cordova is not support in this platform!")
+    }
+  }
+
+  welcomeShow(){
+    this.storage.get('WelcomePage').then((result) => {
+
+      if(result){
+        this.rootPage = HomePage;
       }
-   };
-   
-   const pushObject: PushObject = this.push.init(options);
-   
-   
-   pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
-   
-   pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
-   
-   pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
+      else{
+        this.rootPage = WelcomePage;
+        this.storage.set('WelcomePage', true);
+      }
+    });
   }
 }

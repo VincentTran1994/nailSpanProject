@@ -1,0 +1,10 @@
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor='let data of dataFromFirebase'>
+      <h2 *ngIf="data.msg.title; else noneTitle">{{data.msg.title}}</h2>
+      <ng-template #noneTitle>No Title</ng-template>
+      <p>{{data.msg.body}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>

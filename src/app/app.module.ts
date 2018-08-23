@@ -9,9 +9,12 @@ import { ContactPage } from '../pages/contact/contact';
 import { ContactFormPage } from '../pages/contact-form/contact-form';
 import { ContactPopOverPage } from '../pages/contact-pop-over/contact-pop-over';
 import { ServicePage } from '../pages/service/service';
+import { NotificationPopOverPage } from '../pages/notification-pop-over/notification-pop-over';
+import { WelcomePage } from '../pages/welcome/welcome';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { WpApiProvider } from '../providers/wp-api/wp-api';
 import { EmailComposer } from '../../node_modules/@ionic-native/email-composer';
@@ -21,6 +24,23 @@ import { MoreDetailPage } from '../pages/more-detail/more-detail';
 import { ServiceWpProvider } from '../providers/service-wp/service-wp';
 import { Push } from '@ionic-native/push';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import {AngularFireDatabaseModule} from 'angularfire2/database'
+import { Firebase } from '@ionic-native/firebase';
+import { FcmProvider } from '../providers/fcm/fcm';
+
+
+
+const fireBaseConfig = {
+  apiKey: "AIzaSyAnDR0mAVtYUjg1ffcZLCic1BPfzzRFovo",
+  authDomain: "nailsgpsapp.firebaseapp.com",
+  databaseURL: "https://nailsgpsapp.firebaseio.com",
+  projectId: "nailsgpsapp",
+  storageBucket: "nailsgpsapp.appspot.com",
+  messagingSenderId: "220488692836"
+};
 
 
 @NgModule({
@@ -32,12 +52,18 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     ContactFormPage,
     ContactPopOverPage,
     ServicePage,
-    MoreDetailPage
+    MoreDetailPage,
+    NotificationPopOverPage,
+    WelcomePage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    AngularFireModule.initializeApp(fireBaseConfig),
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -48,7 +74,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     ContactFormPage,
     ContactPopOverPage,
     ServicePage,
-    MoreDetailPage
+    MoreDetailPage,
+    NotificationPopOverPage,
+    WelcomePage
   ],
   providers: [
     StatusBar,
@@ -61,7 +89,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     WpApiProvider,
     ServiceWpProvider,
     Push,
-    InAppBrowser
+    InAppBrowser,
+    Firebase,
+    FcmProvider
   ]
 })
 export class AppModule {}

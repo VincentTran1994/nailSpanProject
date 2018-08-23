@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, PopoverController } from 'ionic-angular';
 import { WpApiProvider } from '../../providers/wp-api/wp-api';
 import { LoadingController } from 'ionic-angular';
 import * as $ from 'jquery'
+import { NotificationPopOverPage } from '../notification-pop-over/notification-pop-over';
+
+
 
 @Component({
   selector: 'page-home',
@@ -16,16 +19,16 @@ export class HomePage {
 
 
   constructor(public navCtrl: NavController,
-              public wpAPI: WpApiProvider,
-              public loadingCrtl: LoadingController) 
-  {  
+    public wpAPI: WpApiProvider,
+    public popOver: PopoverController,
+    public loadingCrtl: LoadingController) {
     this.loading();
     this.wpAPI.getSinglePage("25").subscribe(
       (res) => {
         let slider = $($.parseHTML(res['content']['rendered'])).find('div.m-fullsize');
-        for( let i = 0; i< slider.length; i++){
+        for (let i = 0; i < slider.length; i++) {
           let tempUrl = $(slider[i]).css('background-image')
-          tempUrl = tempUrl.replace('url(','').replace(')','').replace(/\"/gi, "");
+          tempUrl = tempUrl.replace('url(', '').replace(')', '').replace(/\"/gi, "");
           this.slideData.push(tempUrl);
         }
         // Service part
@@ -34,17 +37,17 @@ export class HomePage {
         let title = services.find('h3').children('a');
         let content = services.find('.service-description')
 
-        for(let i = 0; i < images.length; i++){
+        for (let i = 0; i < images.length; i++) {
           let service = {
-            img : $(images[i]).attr('src'),
+            img: $(images[i]).attr('src'),
             title: $(title[i]).text(),
             content: $(content[i]).text()
           }
           this.services.push(service);
         }
         //Gallery part
-        let gallery =  $($.parseHTML(res['content']['rendered'])).find('li.gallery-item');
-        for(let i=0; i< gallery.length; i++){
+        let gallery = $($.parseHTML(res['content']['rendered'])).find('li.gallery-item');
+        for (let i = 0; i < gallery.length; i++) {
           this.galleries.push($(gallery[i]).find('img').attr('src'));
         }
       });
@@ -59,11 +62,19 @@ export class HomePage {
       );
   }
 
-  loading(){
+  loading() {
     const loader = this.loadingCrtl.create({
       content: "Please wait while Loading Contents...",
-      duration: 500
+      duration: 1000
     });
     loader.present();
+  }
+
+
+
+  presentNotifications(event) {
+    this.popOver.create(NotificationPopOverPage).present({
+      ev: event,
+    });
   }
 }
