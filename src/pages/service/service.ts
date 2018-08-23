@@ -25,12 +25,12 @@ export class ServicePage {
     
     this.serviceProvider.getData()
       .subscribe(res => {
-        if(res){
-          this.toast.create({
-            message: "sucessfull getting data!",
-            duration: 3000
-          }).present();
-        }
+        // if(res){
+        //   this.toast.create({
+        //     message: "sucessfull getting data!",
+        //     duration: 3000
+        //   }).present();
+        // }
         let dataSource = $('div.vc_inner', $.parseHTML(res));
         let headers = $('h2', $.parseHTML(res));
         for (let i = 0; i < dataSource.length; i++) {
@@ -55,7 +55,7 @@ export class ServicePage {
           this.menus.push(catogory);
 
         }
-        console.log(this.menus);
+        // console.log(this.menus);
       });
 
     // this.http.get('http://danang.1888demo.com/nails-ws003/wp-json/wp/v2/pages/104')
