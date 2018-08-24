@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, ToastController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Storage } from '@ionic/storage';
+// import { Storage } from '@ionic/storage';
 
 import { HomePage } from '../pages/home/home';
 import { ContactPage } from '../pages/contact/contact';
@@ -11,7 +11,7 @@ import { FcmProvider } from '../providers/fcm/fcm';
 import { tap } from 'rxjs/operators';
 import { ContactPopOverPage } from '../pages/contact-pop-over/contact-pop-over';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { WelcomePage } from '../pages/welcome/welcome';
+// import { WelcomePage } from '../pages/welcome/welcome';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,13 +19,13 @@ import { WelcomePage } from '../pages/welcome/welcome';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = WelcomePage;
+  rootPage: any = HomePage;
 
   pages: Array<{ title: string, component: any }>;
 
   constructor(public platform: Platform,
     public statusBar: StatusBar,
-    public storage: Storage,
+    // public storage: Storage,
     public fcm: FcmProvider,
     public angularFireData: AngularFireDatabase,
     public alertControl: AlertController,
@@ -48,7 +48,7 @@ export class MyApp {
       //notification
       this.fcmService();
       //welcome page showing control(show only one time)
-      this.welcomeShow();
+      // this.welcomeShow();
     });
   }
 
@@ -102,16 +102,16 @@ export class MyApp {
     }
   }
 
-  welcomeShow(){
-    this.storage.get('WelcomePage').then((result) => {
+  // welcomeShow(){
+  //   this.storage.get('WelcomePage').then((result) => {
 
-      if(result){
-        this.rootPage = HomePage;
-      }
-      else{
-        this.rootPage = WelcomePage;
-        this.storage.set('WelcomePage', true);
-      }
-    });
-  }
+  //     if(result){
+  //       this.rootPage = HomePage;
+  //     }
+  //     else{
+  //       this.rootPage = WelcomePage;
+  //       this.storage.set('WelcomePage', true);
+  //     }
+  //   });
+  // }
 }

@@ -10,11 +10,11 @@ import { ContactFormPage } from '../pages/contact-form/contact-form';
 import { ContactPopOverPage } from '../pages/contact-pop-over/contact-pop-over';
 import { ServicePage } from '../pages/service/service';
 import { NotificationPopOverPage } from '../pages/notification-pop-over/notification-pop-over';
-import { WelcomePage } from '../pages/welcome/welcome';
+// import { WelcomePage } from '../pages/welcome/welcome';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { IonicStorageModule } from '@ionic/storage';
+// import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { WpApiProvider } from '../providers/wp-api/wp-api';
 import { EmailComposer } from '../../node_modules/@ionic-native/email-composer';
@@ -22,7 +22,7 @@ import { CallNumber } from '@ionic-native/call-number';
 import { SMS } from '../../node_modules/@ionic-native/sms';
 import { MoreDetailPage } from '../pages/more-detail/more-detail';
 import { ServiceWpProvider } from '../providers/service-wp/service-wp';
-import { Push } from '@ionic-native/push';
+// import { Push } from '@ionic-native/push';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { AngularFireModule } from 'angularfire2';
@@ -54,7 +54,7 @@ const fireBaseConfig = {
     ServicePage,
     MoreDetailPage,
     NotificationPopOverPage,
-    WelcomePage
+    // WelcomePage
   ],
   imports: [
     BrowserModule,
@@ -63,7 +63,7 @@ const fireBaseConfig = {
     AngularFirestoreModule,
     AngularFireModule.initializeApp(fireBaseConfig),
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    // IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -76,7 +76,7 @@ const fireBaseConfig = {
     ServicePage,
     MoreDetailPage,
     NotificationPopOverPage,
-    WelcomePage
+    // WelcomePage
   ],
   providers: [
     StatusBar,
@@ -88,7 +88,6 @@ const fireBaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     WpApiProvider,
     ServiceWpProvider,
-    Push,
     InAppBrowser,
     Firebase,
     FcmProvider

@@ -6,7 +6,6 @@ import * as $ from 'jquery'
 import { NotificationPopOverPage } from '../notification-pop-over/notification-pop-over';
 
 
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -69,8 +68,6 @@ export class HomePage {
     });
     loader.present();
   }
-
-
 
   presentNotifications(event) {
     this.popOver.create(NotificationPopOverPage).present({
